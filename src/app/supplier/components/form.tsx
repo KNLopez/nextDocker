@@ -17,8 +17,7 @@ const SupplierForm = () => {
   } = useForm<SupplierFormTypes>();
   const onSubmit: SubmitHandler<SupplierFormTypes> = async (data) => {
     data.price = Number(data.price);
-    const newUser = await createSupplier(data);
-    console.log(newUser);
+    await createSupplier(data);
   };
 
   return (

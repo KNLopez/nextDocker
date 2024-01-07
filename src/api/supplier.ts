@@ -8,6 +8,5 @@ export const addSupplier = async ({ name, price }: AddSupplierProps) => {
     },
     body: JSON.stringify({ name, price }),
   }).then((res) => res.json());
-  console.log({ response });
   return response;
 };
