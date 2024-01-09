@@ -1,7 +1,7 @@
 export type Supplier = {
-  id: number;
+  ID: number;
   name: string;
   price: number;
 };
 
-export type AddSupplierProps = Omit<Supplier, "id">;
+export type AddSupplierProps = Omit<Supplier, "ID">;

@@ -19,3 +19,10 @@ export const getSuppliersService = async () => {
   );
   return response;
 };
+
+export const getSupplierService = async (id: number) => {
+  const response = await fetch(`${BASE_URL}/supplier/${id}`).then((res) =>
+    res.json()
+  );
+  return response;
+};

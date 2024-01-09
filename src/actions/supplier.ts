@@ -1,6 +1,10 @@
 "use server";
 
-import { addSupplierService, getSuppliersService } from "@/api/supplier";
+import {
+  addSupplierService,
+  getSuppliersService,
+  getSupplierService,
+} from "@/api/supplier";
 import { AddSupplierProps, Supplier } from "@/types/supplier";
 import { revalidatePath } from "next/cache";
 
@@ -12,4 +16,9 @@ export async function createSupplier({ name, price }: AddSupplierProps) {
 
 export async function getSuppliers(): Promise<Supplier[]> {
   return await getSuppliersService();
+}
+
+export async function getSupplier(id: number): Promise<Supplier> {
+  const supplier = await getSupplierService(id);
+  return supplier;
 }
