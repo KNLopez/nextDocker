@@ -1,7 +1,9 @@
 import { AddSupplierProps } from "@/types/supplier";
 
+const BASE_URL = "http://172.17.0.4:8080/api";
+
 export const addSupplierService = async ({ name, price }: AddSupplierProps) => {
-  const response = await fetch("http://172.17.0.4:8080/api/supplier", {
+  const response = await fetch(`${BASE_URL}/supplier`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -12,8 +14,8 @@ export const addSupplierService = async ({ name, price }: AddSupplierProps) => {
 };
 
 export const getSuppliersService = async () => {
-  const response = await fetch("http://172.17.0.4:8080/api/supplier").then(
-    (res) => res.json()
+  const response = await fetch(`${BASE_URL}/supplier`).then((res) =>
+    res.json()
   );
   return response;
 };

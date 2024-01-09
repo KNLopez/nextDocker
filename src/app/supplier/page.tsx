@@ -15,7 +15,7 @@ const SupplierPage = async () => {
             p-2 m-2
           "
         >
-          <p>{supplier.name}</p>
+          <p>{supplier.names}</p>
           <p>{supplier.price}</p>
         </div>
       ))}
