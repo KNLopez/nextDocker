@@ -26,3 +26,17 @@ export const getSupplierService = async (id: number) => {
   );
   return response;
 };
+
+export const updateSupplierService = async (
+  id: number,
+  { name, price }: AddSupplierProps
+) => {
+  const response = await fetch(`${BASE_URL}/supplier/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ name, price }),
+  }).then((res) => res.json());
+  return response;
+};

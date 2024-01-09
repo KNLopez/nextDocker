@@ -1,5 +1,5 @@
 "use client";
-import { createSupplier } from "@/actions/supplier";
+import { createSupplier, updateSupplier } from "@/actions/supplier";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 type SupplierFormTypes = {
@@ -7,32 +7,55 @@ type SupplierFormTypes = {
   price: number;
 };
 
-const SupplierForm = () => {
+const SupplierForm = ({
+  defaultValues = { ID: undefined, name: "", price: 0 },
+}: {
+  defaultValues?: SupplierFormTypes & { ID?: number };
+}) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<SupplierFormTypes>();
-  const onSubmit: SubmitHandler<SupplierFormTypes> = async (data) => {
+  } = useForm<SupplierFormTypes>({
+    defaultValues,
+  });
+  const onSubmit: SubmitHandler<SupplierFormTypes & { ID?: number }> = async (
+    data
+  ) => {
     data.price = Number(data.price);
-    await createSupplier(data);
+    if (defaultValues.ID) {
+      data.ID = defaultValues.ID;
+      await updateSupplier(data.ID, data);
+    } else {
+      await createSupplier(data);
+    }
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
       <input
         {...register("name", { required: true })}
-        className=" text-gray-700"
+        className="
+          text-gray-700
+          border border-gray-800 rounded-md
+          p-2 m-2
+        "
       />
       {errors.name && <span>This field is required</span>}
       <input
         {...register("price", { required: true })}
-        className=" text-gray-700"
+        className="text-gray-700
+        border border-gray-800 rounded-md
+        p-2 m-2"
       />
       {errors.price && <span>This field is required</span>}
       <input
         type="submit"
-        className=" bg-green-500 text-gray-800 cursor-pointer"
+        className="
+          bg-blue-500 hover:bg-blue-700 text-white font-bold
+          py-2 px-4 rounded
+          m-2
+        "
       />
     </form>
   );
